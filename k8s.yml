@@ -1,0 +1,48 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo
+  namespace: default
+  labels:
+    app: demo
+spec:
+  selector:
+    matchLabels:
+      app: demo
+  replicas: 1
+  revisionHistoryLimit: 10
+  minReadySeconds: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: demo
+    spec:
+      containers:
+        - image: scg130/demo:<BUILD_TAG>
+          imagePullPolicy: IfNotPresent
+          name: demo
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi
+            requests:
+              cpu: 50m
+              memory: 50Mi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-svc
+  namespace: default
+  labels:
+    app: demo
+spec:
+  selector:
+    app: demo
