@@ -1,7 +1,7 @@
 GOPATH:=$(shell go env GOPATH)
-user=${user}
-pwd=${pwd}
-tag=${tag}
+user:=${user}
+pwd:=${pwd}
+tag:=${tag}
 
 .PHONY: build
 build:
@@ -17,5 +17,5 @@ docker:
 
 .PHONY: push
 push:
-    docker login -u ${user} -p ${pwd}
-	docker push scg130/demo:{$tag}
+	docker login -u ${user} -p ${pwd}
+	docker push scg130/demo:${tag}
