@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"log"
 	"net/http"
 )
 
@@ -10,5 +11,5 @@ func main() {
 	s.GET("/",func(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK,"ok")
 	})
-	s.Run()
+	log.Fatal(s.Run())
 }
