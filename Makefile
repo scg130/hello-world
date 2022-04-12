@@ -5,7 +5,7 @@ tag:=${tag}
 
 .PHONY: build
 build:
-	GOOS=linux go build  -o  runapp .
+	go build  -o  runapp .
 
 .PHONY: test
 test:
