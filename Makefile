@@ -5,7 +5,7 @@ tag:=${tag}
 
 .PHONY: build
 build:
-	GOOS=linux go build  -o  runapp .
+	GOOS=linux go build -tags netgo  -o  runapp .
 
 .PHONY: test
 test:
