@@ -12,5 +12,6 @@ func main() {
 	s.GET("/", func(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, "ok")
 	})
+
 	log.Fatal(s.Run())
 }
