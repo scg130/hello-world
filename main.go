@@ -11,7 +11,7 @@ import (
 func main() {
 	s := gin.Default()
 	s.GET("/", func(ctx *gin.Context) {
-		fmt.Println("adfs")
+		fmt.Println("adfss")
 		ctx.JSON(http.StatusOK, "ok!")
 	})
 
