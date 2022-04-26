@@ -2,14 +2,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: demo
+  name: demo-<BUILD_TAG>
   namespace: default
   labels:
-    app: demo
+    app: demo-<BUILD_TAG>
 spec:
   selector:
     matchLabels:
-      app: demo
+      app: demo-<BUILD_TAG>
   replicas: 1
   revisionHistoryLimit: 10
   minReadySeconds: 5
@@ -21,12 +21,12 @@ spec:
   template:
     metadata:
       labels:
-        app: demo
+        app: demo-<BUILD_TAG>
     spec:
       containers:
         - image: scg130/demo:<BUILD_TAG>
           imagePullPolicy: IfNotPresent
-          name: demo
+          name: demo-<BUILD_TAG>
           resources:
             limits:
               cpu: 100m
@@ -42,7 +42,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: demo-svc
+  name: demo-<BUILD_TAG>-svc
   namespace: default
   labels:
     app: demo
