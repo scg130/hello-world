@@ -1,19 +1,12 @@
 pipeline {
-    stage("deploy to test") {
-    when {
-        branch 'master'
+    agent { label 'linux' }
+    stages {
+        stage('Build') {
+            steps {
+                groovy {
+                    script 'println "Hello World"'
+                }
+            }
+        }
     }
-    steps{
-        echo "deploy to prod"
-    }
-}
-
-stage("deploy to prod") {
-    when {
-        branch 'develop'
-    }
-    steps {
-        echo "deploy to test"
-    }
-}
 }
