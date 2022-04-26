@@ -7,8 +7,7 @@ def git_url = "https://github.com/scg130/hello-world.git"
 node('jnlp') {
     stage('拉取代码') {
         sh "echo env.BRANCH_NAME"
-        sh "echo ${GIT_BRANCH}"
-        checkout([$class: 'GitSCM', branches: [[name: "*/${branch}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: "${git_url}"]]])
+        // checkout([$class: 'GitSCM', branches: [[name: "*/${branch}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: "${git_url}"]]])
     }
  
     stage('编译 安装公共实体bean') {
