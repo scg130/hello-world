@@ -1,10 +1,10 @@
 pipeline {
-    agent { label 'linux' }
+    agent { label 'jnlp' }
     stages {
         stage('Build') {
             steps {
                 groovy {
-                    script 'println "Hello World"'
+                    script 'docker -v'
                 }
             }
         }
