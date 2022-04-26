@@ -1,6 +1,6 @@
-//git凭证ID
+
 def git_auth = "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"
-//git的url地址
+
 def git_url = "https://github.com/scg130/hello-world.git"
 
 def branch = env.GIT_BRANCH
