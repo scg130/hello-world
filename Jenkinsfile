@@ -6,6 +6,7 @@ def git_url = "https://github.com/scg130/hello-world.git"
 // 如果是父子工程，12-14行代码可以注释掉
 node('jnlp') {
     stage('拉取代码') {
+        sh "echo ${git_params['GIT_BRANCH']}"
         checkout([$class: 'GitSCM', branches: [[name: "*/${branch}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: "${git_url}"]]])
     }
  
@@ -15,7 +16,7 @@ node('jnlp') {
  
     stage('工程编译') {
         //定义项目名称+镜像的版本号,对镜像名称进行拼接
-        def imageName = "${project_name}:${tag}"
+        // def imageName = "${project_name}:${tag}"
         // 编译打包开始
         // sh "mvn clean package -Dmaven.test.skip=true dockerfile:build "
         //对镜像打上标签
