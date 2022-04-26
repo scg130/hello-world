@@ -12,7 +12,7 @@ node('jnlp') {
     }
  
     stage('编译 安装公共实体bean') {
-        sh "echo 1"
+        sh "echo  1"
     }
  
     stage('工程编译') {
