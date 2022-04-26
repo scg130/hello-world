@@ -20,8 +20,10 @@ node('jnlp') {
     }
  
     stage('build') {
-        sh 'echo build'
-        sh 'make build'
+        script{
+            echo 'go build'
+            sh 'make build'
+        }
     }
  
     stage('docker') {
