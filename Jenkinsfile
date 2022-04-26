@@ -6,16 +6,16 @@ def git_url = "https://github.com/scg130/hello-world.git"
 def branch = env.GIT_BRANCH
 // 如果是父子工程，12-14行代码可以注释掉
 node('jnlp') {
-    stage('拉取代码') {
+    stage('checkout') {
         sh "echo ${env}"
         checkout([$class: 'GitSCM', branches: [[name: "*/${branch}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: "${git_url}"]]])
     }
  
-    stage('编译 安装公共实体bean') {
+    stage('build') {
         sh "echo  1"
     }
  
-    stage('工程编译') {
+    stage('test') {
         //定义项目名称+镜像的版本号,对镜像名称进行拼接
         // def imageName = "${project_name}:${tag}"
         // 编译打包开始
@@ -25,7 +25,7 @@ node('jnlp') {
         sh "echo 2"
     }
  
-    stage('docker部署') {
+    stage('docker') {
          //镜像名称
         //  def imageName = "${project_name}:${tag}"
          //删除原有容器
@@ -37,7 +37,7 @@ node('jnlp') {
         sh "echo 3"
     }
  
-    stage('启动并监控日志') {
+    stage('deploy') {
     //    sh "docker logs -f ${project_name}"
         sh "echo 4"
     }
