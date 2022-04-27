@@ -3,7 +3,7 @@ def git_auth = "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"
 
 def git_url = "https://github.com/scg130/hello-world.git"
 
-def branch = sed -n 's/\//-/p' env.BRANCH_NAME
+def branch = sed -i 's/\//-/' env.BRANCH_NAME
 
 node('jnlp') {
     stage('clone') {
