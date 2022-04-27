@@ -7,7 +7,7 @@ def branch = env.GIT_BRANCH
 
 node('jnlp') {
     stage('clone') {
-        echo "${branch}"
+        echo "${branch}" 
         sh 'echo clone'
         checkout([$class: 'GitSCM', branches: [[name: "*/${branch}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: "${git_url}"]]])
         sh 'go mod tidy'
