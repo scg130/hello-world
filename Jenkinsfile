@@ -4,7 +4,7 @@ def git_auth = "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"
 def git_url = "https://github.com/scg130/hello-world.git"
 
 def branch = env.BRANCH_NAME
-
+tag  = branch.replaceAll("/", "-")
 node('jnlp') {
     stage('clone') {
         sh "echo ${branch}"
@@ -30,7 +30,7 @@ node('jnlp') {
     stage('docker') {
         sh 'echo docker'
         script{
-            sh "make docker tag=${branch}"
+            sh "make docker tag=${tag}"
             withCredentials([usernamePassword(credentialsId: 'hub-docker', passwordVariable: 'passwd', usernameVariable: 'user')]) {
                 // sh "make push user=$user pwd=$passwd tag=$tag"
             }
@@ -40,7 +40,7 @@ node('jnlp') {
     stage('deploy') {
         echo "deploy"
         script{
-            sh "sed -i 's/<BUILD_TAG>/${branch}/' k8s.yml"
+            sh "sed -i 's/<BUILD_TAG>/${tag}/' k8s.yml"
             sh "kubectl apply -f k8s.yml"    
         }
     }
