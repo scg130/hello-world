@@ -9,7 +9,7 @@ node('jnlp') {
     stage('clone') {
         sh 'echo clone'
         // checkout([$class: 'GitSCM', branches: [[name: "*/${branch}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: "${git_url}"]]])
-        sh 'git clone ${git_url}'
+        sh "git clone ${git_url}"
         sh 'go mod tidy'
         sh 'ls -al'
     }
