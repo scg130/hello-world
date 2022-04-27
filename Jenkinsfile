@@ -7,6 +7,7 @@ def branch = env.GIT_BRANCH
 // 如果是父子工程，12-14行代码可以注释掉
 node('jnlp') {
     stage('clone') {
+        sh "echo ${branch}"
         sh 'echo clone'
         checkout([$class: 'GitSCM', branches: [[name: "*/${branch}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: "${git_url}"]]])
         sh 'go mod tidy'
