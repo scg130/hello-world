@@ -8,7 +8,6 @@ tag  = branch.replaceAll("/", "-")
 node('jnlp') {
         stage("test"){
             sh "env"
-            sh "scm"
         }
 //     stage('clone') {
 //         // sh "env"
