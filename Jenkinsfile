@@ -49,6 +49,6 @@ node('jnlp') {
     stage('delete image') {
         echo "delete images"
         sh "docker system prune -f"
-        sh "docker rmi scg130/demo:${tag}"
+        // sh "docker rmi scg130/demo:${tag}"
     }
 }
