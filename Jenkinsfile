@@ -7,6 +7,7 @@ def branch = env.BRANCH_NAME
 tag  = branch.replaceAll("/", "-")
 node('jnlp') {
     stage('clone') {
+        // sh "env"
         sh "echo ${branch}"
         sh 'echo clone'
         checkout([$class: 'GitSCM', branches: [[name: "*/${branch}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: "${git_url}"]]])
@@ -40,7 +41,8 @@ node('jnlp') {
     stage('deploy') {
         echo "deploy"
         script{
-            sh "sed -i 's/<BUILD_TAG>/${tag}/' k8s.yml"
+            sh "sed -i 's/<BUILD_TAG>/${tag}/g' k8s.yml"
+            sh "cat k8s.yml"
             sh "kubectl apply -f k8s.yml"    
         }
     }
@@ -48,5 +50,6 @@ node('jnlp') {
     stage('delete image') {
         echo "delete images"
         sh "docker system prune -f"
+        // sh "docker rmi scg130/demo:${tag}"
     }
 }
