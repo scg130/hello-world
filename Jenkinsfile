@@ -7,6 +7,7 @@ def branch = env.BRANCH_NAME
 tag  = branch.replaceAll("/", "-")
 node('jnlp') {
     stage('clone') {
+        sh "env"
         sh "echo ${branch}"
         sh 'echo clone'
         checkout([$class: 'GitSCM', branches: [[name: "*/${branch}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: "${git_url}"]]])
