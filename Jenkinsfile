@@ -7,9 +7,7 @@ def branch = env.BRANCH_NAME
 tag  = branch.replaceAll("/", "-")
 node('jnlp') {
         stage("test"){
-            script{
-                env
-            }
+            sh "env"
         }
 //     stage('clone') {
 //         // sh "env"
