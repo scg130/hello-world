@@ -36,7 +36,7 @@ spec:
               memory: 50Mi
           env:
             - name: VER
-              value: <VER>
+              value: "<VER>"
           envFrom:
             - configMapRef:
                 name: novel-config
