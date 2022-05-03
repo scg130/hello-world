@@ -11,11 +11,11 @@ node('jnlp') {
             sh 'echo "ready"'
         }
     stage('clone') {
-        // sh "env"
+        //  sh "env"
         sh "echo ${branch}"
         sh 'echo clone'
         checkout([$class: 'GitSCM', branches: [[name: "*/${branch}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: "${git_url}"]]])
-         project_name = sh (script: 'basename -s .git `git config --get remote.origin.url`', returnStdout:true).trim ()
+        project_name = sh (script: 'basename -s .git `git config --get remote.origin.url`', returnStdout:true).trim()
         sh 'go mod tidy'
         sh 'ls -al'
     }
@@ -46,8 +46,10 @@ node('jnlp') {
     stage('deploy') {
         echo "deploy"
         script{
+            def ver = sh (script: 'date +%s', returnStdout:true).toString().trim()
             sh "sed -i 's/<TAG>/${tag}/g' k8s.yml"
             sh "sed -i 's/<PROJECT>/${project_name}/g' k8s.yml"
+            sh "sed -i 's/<VER>/${ver}/g' k8s.yml"
             sh "cat k8s.yml"
             sh "kubectl apply -f k8s.yml"
         }
