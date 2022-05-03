@@ -13,9 +13,9 @@ test:
 
 .PHONY: docker
 docker:
-	docker build . -t scg130/demo:${tag}
+	docker build . -t scg130/hello-world:${tag}
 
 .PHONY: push
 push:
 	docker login -u ${user} -p ${pwd}
-	docker push scg130/demo:${tag}
+	docker push scg130/hello-world:${tag}
