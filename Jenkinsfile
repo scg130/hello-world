@@ -3,13 +3,14 @@ def git_auth = "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"
 
 def git_url = "https://github.com/scg130/hello-world.git"
 
+def project_name = ""
 def branch = env.BRANCH_NAME
 tag  = branch.replaceAll("/", "-")
 node('jnlp') {
         stage("test"){
-            sh "env.PROJECT_NAME"
             checkout([$class: 'GitSCM', branches: [[name: "*/${branch}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: "${git_url}"]]])
-            sh 'basename -s .git `git config --get remote.origin.url`'
+            sh 'project_name = basename -s .git `git config --get remote.origin.url`'
+            sh 'echo ${project_name}'
         }
     // stage('clone') {
     //     // sh "env"
