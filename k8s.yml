@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - image: scg130/<PROJECT>:<TAG>
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           name: <PROJECT>-<TAG>
           resources:
             limits:
