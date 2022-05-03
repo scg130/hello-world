@@ -10,7 +10,7 @@ node('jnlp') {
         stage("test"){
             checkout([$class: 'GitSCM', branches: [[name: "*/${branch}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: "${git_url}"]]])
             sh 'project_name = basename -s .git `git config --get remote.origin.url`'
-            sh "echo ${project_name}"
+            sh "echo  ${project_name}"
         }
     // stage('clone') {
     //     // sh "env"
