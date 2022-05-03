@@ -13,6 +13,6 @@ func main() {
 	s.GET("/", func(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, "ok1!!!")
 	})
-	fmt.Println("7")
+	fmt.Println("8")
 	log.Fatal(s.Run())
 }
