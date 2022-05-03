@@ -46,7 +46,7 @@ node('jnlp') {
     stage('deploy') {
         echo "deploy"
         script{
-            def ver = sh (script: 'date +%s', returnStdout:true)
+            def ver = sh (script: 'date +%s', returnStdout:true).toString().trim()
             sh "sed -i 's/<TAG>/${tag}/g' k8s.yml"
             sh "sed -i 's/<PROJECT>/${project_name}/g' k8s.yml"
             sh "sed -i 's/<VER>/${ver}/g' k8s.yml"
