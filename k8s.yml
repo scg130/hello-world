@@ -2,14 +2,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: demo-<BUILD_TAG>
+  name: <PROJECT>-<TAG>
   namespace: default
   labels:
-    app: demo-<BUILD_TAG>
+    app: <PROJECT>-<TAG>
 spec:
   selector:
     matchLabels:
-      app: demo-<BUILD_TAG>
+      app: <PROJECT>-<TAG>
   replicas: 1
   revisionHistoryLimit: 10
   minReadySeconds: 5
@@ -17,16 +17,16 @@ spec:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
-      maxUnavailable: 1
+      maxUnavailable: 0
   template:
     metadata:
       labels:
-        app: demo-<BUILD_TAG>
+        app: <PROJECT>-<TAG>
     spec:
       containers:
-        - image: scg130/demo:<BUILD_TAG>
-          imagePullPolicy: IfNotPresent
-          name: demo-<BUILD_TAG>
+        - image: scg130/<PROJECT>:<TAG>
+          imagePullPolicy: Always
+          name: <PROJECT>-<TAG>
           resources:
             limits:
               cpu: 100m
@@ -42,10 +42,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: demo-<BUILD_TAG>-svc
+  name: <PROJECT>-<TAG>-svc
   namespace: default
   labels:
-    app: demo
+    app: <PROJECT>
 spec:
   ports:
     - name: api
@@ -53,4 +53,4 @@ spec:
       protocol: TCP
       targetPort: 8080
   selector:
-    app: demo
+    app: <PROJECT>
