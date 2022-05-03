@@ -38,7 +38,7 @@ node('jnlp') {
         script{
             sh "make docker tag=${tag}"
             withCredentials([usernamePassword(credentialsId: 'hub-docker', passwordVariable: 'passwd', usernameVariable: 'user')]) {
-                // sh "make push user=$user pwd=$passwd tag=$tag"
+                //  sh "make push user=$user pwd=$passwd tag=$tag"
             }
         }
     }
