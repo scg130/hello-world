@@ -23,7 +23,7 @@ node('jnlp') {
     stage('test') {
         echo 'go test'
         echo "${branch}"
-        sh 'make test'
+        //sh 'make test'
     }
 
     stage('build') {
